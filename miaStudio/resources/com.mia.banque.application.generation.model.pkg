@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="com.mia.banque.application.generation.model" METAMODEL="MVC" NUMBER="4"
+<PACKAGE NAME="com.mia.banque.application.generation.model" METAMODEL="MVC" NUMBER="7"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="scenarioModel" VISIBILITY="public" META_OBJECT="Model" CATEGORY="default" DOCUMENTATION="">
 		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="Model"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.model" META_OBJECT="Model" CATEGORY="default" NAME="generationInterface" PARAM_COUNT="0"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.model" META_OBJECT="Model" CATEGORY="default" NAME="generationClasse" PARAM_COUNT="0"/>
 	</SCENARIO>
+	<TEXT_MACRO NAME="declarationMethodes" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String result = "";
+
+for (Model element : current.getOwnedElements()){
+	 result += manager.getString(element, "variableGetterDeclaration");
+	 result += manager.getString(element, "variableSetterDeclaration");
+}
+
+return result;
+]]></TEXT>
+	</TEXT_MACRO>
 	<SCRIPT NAME="generationClasse" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="US-ASCII" VISIBILITY="private">
 		<TEXT><![CDATA[
 package com.mia.banque.model.impl;
@@ -33,6 +47,8 @@ import java.util.List;
 
 public interface I[[name]] {
 
+	[[declarationMethodes]]
+
 }
 ]]></TEXT>
 		<PROPERTY NAME="Filename"/>
@@ -42,4 +58,22 @@ public interface I[[name]] {
 I[[name]].java
 ]]></TEXT>
 	</SCRIPT>
+	<TEXT_MACRO NAME="variableGetterDeclaration" META_OBJECT="ModelProperty" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String result = "";
+
+result += "public " + current.getClass() + "get" + current.getName() + "();\n";
+
+return result;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="variableSetterDeclaration" META_OBJECT="ModelProperty" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String result = "";
+
+result += "public void set" + current.getName() + "(" + current.getClass() + ");";
+
+return result;
+]]></TEXT>
+	</TEXT_MACRO>
 </PACKAGE>
