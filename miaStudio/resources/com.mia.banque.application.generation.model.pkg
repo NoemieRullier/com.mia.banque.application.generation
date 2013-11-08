@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PACKAGE SYSTEM "package.dtd">
+<PACKAGE NAME="com.mia.banque.application.generation.model" METAMODEL="MVC" NUMBER="0"
+ DOCUMENTATION="">
+	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
+</PACKAGE>
