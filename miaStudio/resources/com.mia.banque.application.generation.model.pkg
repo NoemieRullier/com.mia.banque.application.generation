@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="com.mia.banque.application.generation.model" METAMODEL="MVC" NUMBER="7"
+<PACKAGE NAME="com.mia.banque.application.generation.model" METAMODEL="MVC" NUMBER="9"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="scenarioModel" VISIBILITY="public" META_OBJECT="Model" CATEGORY="default" DOCUMENTATION="">
@@ -15,6 +15,11 @@ String result = "";
 for (Model element : current.getOwnedElements()){
 	 result += manager.getString(element, "variableGetterDeclaration");
 	 result += manager.getString(element, "variableSetterDeclaration");
+}
+
+for (ModelProperty property : current.getProperties()){
+	result += manager.getString(property, "variableGetterDeclaration");
+	result += manager.getString(property, "variableSetterDeclaration");
 }
 
 return result;
@@ -58,22 +63,28 @@ public interface I[[name]] {
 I[[name]].java
 ]]></TEXT>
 	</SCRIPT>
-	<TEXT_MACRO NAME="variableGetterDeclaration" META_OBJECT="ModelProperty" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+	<SCRIPT NAME="variableGetterDeclaration" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
-String result = "";
-
-result += "public " + current.getClass() + "get" + current.getName() + "();\n";
-
-return result;
+public List<I[[name@¤] get[[name]]();
+	
 ]]></TEXT>
-	</TEXT_MACRO>
-	<TEXT_MACRO NAME="variableSetterDeclaration" META_OBJECT="ModelProperty" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+	</SCRIPT>
+	<SCRIPT NAME="variableSetterDeclaration" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
-String result = "";
-
-result += "public void set" + current.getName() + "(" + current.getClass() + ");";
-
-return result;
+public void set[[name]](List<I[[name@¤] newValue);
+	
 ]]></TEXT>
-	</TEXT_MACRO>
+	</SCRIPT>
+	<SCRIPT NAME="variableGetterDeclaration" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+public String get[[name]]();
+	
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="variableSetterDeclaration" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+public void set[[name]](String newValue);
+	
+]]></TEXT>
+	</SCRIPT>
 </PACKAGE>

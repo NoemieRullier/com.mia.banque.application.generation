@@ -64,11 +64,12 @@ public class mvc_ModelProperty__variableSetterDeclaration_2079589510 implements 
 	public String __invoke_user_code__(final com.mia.formation.mvc.ModelProperty current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-String result = "";
-
-result += "public void set" + current.getName() + "(" + current.getClass() + ");";
-
-return result;
+java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
+_template_buffer.append("public void set");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("(String newValue);");
+_template_buffer.append('\n');
+_template_buffer.append("	");
+return _template_buffer.toString();
 
 }
 }

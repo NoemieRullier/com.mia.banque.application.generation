@@ -13,14 +13,14 @@ import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.*;
 
 @SuppressWarnings({"unused","unchecked","rawtypes","nls","serial",})
-public class mvc_ModelProperty__variableGetterDeclaration_N1275224966 implements com.mia.studio.kernel.compiler.CompiledAction {
+public class mvc_Model__variableGetterDeclaration_N1517991025 implements com.mia.studio.kernel.compiler.CompiledAction {
 
-	public mvc_ModelProperty__variableGetterDeclaration_N1275224966() {
+	public mvc_Model__variableGetterDeclaration_N1517991025() {
 		//Do nothing
 	}
 
 	//For internal use only
-	mvc_ModelProperty__variableGetterDeclaration_N1275224966(int anyInt, List anyList) {
+	mvc_Model__variableGetterDeclaration_N1517991025(int anyInt, List anyList) {
 		List<java.lang.Integer> otherList = anyList;
 		throw new java.lang.UnsupportedOperationException();
 	}
@@ -54,18 +54,19 @@ public class mvc_ModelProperty__variableGetterDeclaration_N1275224966 implements
 		if (_action_parameters.length != 3)
 			throw new IllegalArgumentException("Wrong number of parameters in call to ''variableGetterDeclaration''");
 
-		final com.mia.formation.mvc.ModelProperty current = __check_arg__(com.mia.formation.mvc.ModelProperty.class, _action_parameters[0]);
+		final com.mia.formation.mvc.Model current = __check_arg__(com.mia.formation.mvc.Model.class, _action_parameters[0]);
 		final com.mia.openapi.gen.Context context = __check_arg__(com.mia.openapi.gen.Context.class, _action_parameters[1]);
 		final com.mia.openapi.gen.GenerationServicesManager manager = __check_arg__(com.mia.openapi.gen.GenerationServicesManager.class, _action_parameters[2]);
 
 		return __invoke_user_code__(current, context, manager);
 	}
 
-	public String __invoke_user_code__(final com.mia.formation.mvc.ModelProperty current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
+	public String __invoke_user_code__(final com.mia.formation.mvc.Model current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("public String get");
+_template_buffer.append("public List<I");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("> get");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append("();");
 _template_buffer.append('\n');
 _template_buffer.append("	");

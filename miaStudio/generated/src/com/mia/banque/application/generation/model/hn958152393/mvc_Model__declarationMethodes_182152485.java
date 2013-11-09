@@ -71,6 +71,11 @@ for (Model element : current.getOwnedElements()){
 	 result += manager.getString(element, "variableSetterDeclaration");
 }
 
+for (ModelProperty property : current.getProperties()){
+	result += manager.getString(property, "variableGetterDeclaration");
+	result += manager.getString(property, "variableSetterDeclaration");
+}
+
 return result;
 
 }
