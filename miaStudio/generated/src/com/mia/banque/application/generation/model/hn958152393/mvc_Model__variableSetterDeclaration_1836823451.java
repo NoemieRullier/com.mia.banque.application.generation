@@ -65,11 +65,11 @@ public class mvc_Model__variableSetterDeclaration_1836823451 implements com.mia.
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("public void set");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append("(List<I");
+_template_buffer.append("	public void set");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("s(List<I");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append("> newValue);");
 _template_buffer.append('\n');
-_template_buffer.append("	");
+
 return _template_buffer.toString();
 
 }

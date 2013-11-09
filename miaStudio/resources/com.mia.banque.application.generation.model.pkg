@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="com.mia.banque.application.generation.model" METAMODEL="MVC" NUMBER="9"
+<PACKAGE NAME="com.mia.banque.application.generation.model" METAMODEL="MVC" NUMBER="17"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="scenarioModel" VISIBILITY="public" META_OBJECT="Model" CATEGORY="default" DOCUMENTATION="">
@@ -8,6 +8,21 @@
 		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.model" META_OBJECT="Model" CATEGORY="default" NAME="generationInterface" PARAM_COUNT="0"/>
 		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.model" META_OBJECT="Model" CATEGORY="default" NAME="generationClasse" PARAM_COUNT="0"/>
 	</SCENARIO>
+	<TEXT_MACRO NAME="declarationAttribute" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String result = "";
+
+for (Model element : current.getOwnedElements()){
+	 result += manager.getString(element, "variableDeclaration");
+}
+
+for (ModelProperty property : current.getProperties()){
+	result += manager.getString(property, "variableDeclaration");
+}
+
+return result;
+]]></TEXT>
+	</TEXT_MACRO>
 	<TEXT_MACRO NAME="declarationMethodes" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
 String result = "";
@@ -35,13 +50,14 @@ import com.mia.banque.model.I[[name]];
 
 public class [[name]] implements com.mia.banque.model.I[[name]] {
 
-}
+[[declarationAttribute]]
+[[implementationMethode]]}
 ]]></TEXT>
 		<PROPERTY NAME="Filename"/>
 	</SCRIPT>
 	<SCRIPT NAME="generationClasse$Filename" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
-[[name]].java
+src/com/mia/banque/model/impl/[[name]].java
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="generationInterface" META_OBJECT="Model" CATEGORY="default" FILE_ENCODING="US-ASCII" VISIBILITY="private">
@@ -52,39 +68,106 @@ import java.util.List;
 
 public interface I[[name]] {
 
-	[[declarationMethodes]]
-
+[[declarationMethodes]]
 }
 ]]></TEXT>
 		<PROPERTY NAME="Filename"/>
 	</SCRIPT>
 	<SCRIPT NAME="generationInterface$Filename" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
-I[[name]].java
+src/com/mia/banque/model/I[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<TEXT_MACRO NAME="implementationMethode" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String result = "";
+
+for (Model element : current.getOwnedElements()){
+	result += manager.getString(element, "variableGetterImplementation");
+	result += manager.getString(element, "variableSetterImplementation");
+}
+
+for (ModelProperty property : current.getProperties()){
+	result += manager.getString(property, "variableGetterImplementation");
+	result += manager.getString(property, "variableSetterImplementation");
+}
+
+return result;
+]]></TEXT>
+	</TEXT_MACRO>
+	<SCRIPT NAME="variableDeclaration" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+	private List<com.mia.banque.model.I[[name@¤] list[[name]];
+
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="variableGetterDeclaration" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
-public List<I[[name@¤] get[[name]]();
+	public List<I[[name@¤] get[[name]]s();
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="variableGetterImplementation" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+	public List<com.mia.banque.model.I[[name@¤] get[[name]]s() {
+		if (this.list[[name]] == null) {
+			this.list[[name]] = new ArrayList<com.mia.banque.model.I[[name@¤]();
+		}
+		return this.list[[name]];
+	}
 	
+
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="variableSetterDeclaration" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
-public void set[[name]](List<I[[name@¤] newValue);
+	public void set[[name]]s(List<I[[name@¤] newValue);
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="variableSetterImplementation" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+	public void set[[name]]s(List<com.mia.banque.model.I[[name@¤] newValue) {
+		this.list[[name]] = newValue;
+	}
 	
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="variableDeclaration" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+	private String [[name]];
+
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="variableGetterDeclaration" META_OBJECT="ModelProperty" CATEGORY="default">
 		<TEXT><![CDATA[
-public String get[[name]]();
+	public String get[[name]]();
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="variableGetterImplementation" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+	public String get[[name]]() {
+		return this.[[name]];
+	}
 	
+
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="variableSetterDeclaration" META_OBJECT="ModelProperty" CATEGORY="default">
 		<TEXT><![CDATA[
-public void set[[name]](String newValue);
+	public void set[[name]](String newValue);
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="variableSetterImplementation" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+	public void set[[name]](String newValue) {
+		this.[[name]] = newValue;
+	}
 	
+
 ]]></TEXT>
 	</SCRIPT>
 </PACKAGE>

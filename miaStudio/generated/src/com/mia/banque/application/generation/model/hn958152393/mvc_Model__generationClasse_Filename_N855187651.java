@@ -65,7 +65,7 @@ public class mvc_Model__generationClasse_Filename_N855187651 implements com.mia.
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-
+_template_buffer.append("src/com/mia/banque/model/impl/");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append(".java");
 return _template_buffer.toString();
 

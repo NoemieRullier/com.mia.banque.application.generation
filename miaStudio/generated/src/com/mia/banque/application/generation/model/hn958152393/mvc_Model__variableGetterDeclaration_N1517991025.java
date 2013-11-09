@@ -65,11 +65,11 @@ public class mvc_Model__variableGetterDeclaration_N1517991025 implements com.mia
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("public List<I");
+_template_buffer.append("	public List<I");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append("> get");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append("();");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("s();");
 _template_buffer.append('\n');
-_template_buffer.append("	");
+
 return _template_buffer.toString();
 
 }
