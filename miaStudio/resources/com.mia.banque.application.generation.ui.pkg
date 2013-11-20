@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PACKAGE SYSTEM "package.dtd">
+<PACKAGE NAME="com.mia.banque.application.generation.ui" METAMODEL="MVC" NUMBER="14"
+ DOCUMENTATION="">
+	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
+	<SCENARIO NAME="scenarioUi" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
+		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="View"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.ui" META_OBJECT="View" CATEGORY="default" NAME="generationClasse" PARAM_COUNT="0"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.ui" META_OBJECT="View" CATEGORY="default" NAME="generationInterface" PARAM_COUNT="0"/>
+	</SCENARIO>
+	<SCRIPT NAME="actionBoutonsDeclaration" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+	private Button btn[[name]];
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="actionDeclaration" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+	public void [[name]]();
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="actionMethodesDeclaration" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+	public void [[name]](){
+		this.controler.[[name]];
+	}
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="constructeurDeclaration" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+	/**
+	 * Create the shell.
+	 * @param display
+	 */
+	public [[name]](Display display, com.mia.banque.model.I[[modelName]] model, I[[modelName]]Controler controler) {
+		super(display, SWT.SHELL_TRIM);
+		this.model = model;
+		this.controler = controler;
+	
+		createContents();
+	}
+	
+	private void createContents(){
+		setText("[[description]]");
+		setSize(458, 308);
+		setLayout(new GridLayout(2, false));		
+		btnquitter = new Button(grpButtons, SWT.NONE);
+		btnquitter.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
+		btnquitter.setText("quitter");
+		btnquitter.addSelectionListener(new SelectionAdapter(){
+		        public void widgetSelected(SelectionEvent event)
+		        {
+		          quitter();
+		        }
+		      });
+		}    
+		      
+	@Override
+	protected void checkSubclass() {
+		// Disable the check that prevents subclassing of SWT components
+	}
+	
+]]></TEXT>
+	</SCRIPT>
+	<TEXT_MACRO NAME="declarationBoutons" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String result = "";
+
+for (Action action : current.getActions()){
+	result += manager.getString(action, "actionBoutonsDeclaration");
+	
+}
+
+return result;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="declarationMethodes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String result = "";
+
+for (Action action : current.getActions()){
+	result += manager.getString(action, "actionDeclaration");
+	
+}
+
+return result;
+]]></TEXT>
+	</TEXT_MACRO>
+	<SCRIPT NAME="generationClasse" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package com.mia.banque.ui.view.swt;
+
+[[importOutilsSwt]]
+[[importFichiersProjet]]
+
+public class [[name]] extends Shell implements I[[name]] {
+	
+	private I[[modelName]]Controler controler;
+	private I[[modelName]] model;
+	
+[[declarationBoutons]]	
+[[constructeurDeclaration]]	
+[[implantationMethodes]]
+	
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="generationClasse$Filename" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+src/com/mia/banque/ui/view/swt/[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="generationInterface" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package com.mia.banque.ui.view;
+
+public interface I[[name]] {
+	
+[[declarationMethodes]]
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="generationInterface$Filename" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+src/com/mia/banque/ui/view/I[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<TEXT_MACRO NAME="implantationMethodes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String result = "";
+
+for (Action action : current.getActions()){
+	result += manager.getString(action, "actionMethodesDeclaration");
+	
+}
+
+return result;
+]]></TEXT>
+	</TEXT_MACRO>
+	<SCRIPT NAME="importFichiersProjet" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+import com.mia.banque.ui.controler.I[[modelName]]Controler;
+import com.mia.banque.ui.view.I[[modelName]]View;
+import com.mia.banque.model.I[[modelName]];
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="importOutilsSwt" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Group;
+]]></TEXT>
+	</SCRIPT>
+	<TEXT_MACRO NAME="modelName" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return current.getName().replace("View", "");
+]]></TEXT>
+	</TEXT_MACRO>
+</PACKAGE>

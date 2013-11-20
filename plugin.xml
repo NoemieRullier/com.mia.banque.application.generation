@@ -1,7 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?eclipse version="3.4"?>
+
 <plugin>
    <extension point="com.mia.studio.generation.core.generation_package">
       <package file="miaStudio/resources/com.mia.banque.application.generation.model.pkg"/>
    </extension>
+   
+   
+   
+   <extension point="com.mia.studio.generation.core.generation_package">
+      <package file="miaStudio/resources/com.mia.banque.application.generation.ui.pkg"/>
+   </extension>
+   <extension point="com.mia.studio.generation.core.generation_package">
+      <package file="miaStudio/resources/com.mia.banque.application.generation.controler.pkg"/>
+   </extension>
+   
 </plugin>
