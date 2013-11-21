@@ -13,14 +13,14 @@ import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.*;
 
 @SuppressWarnings({"unused","unchecked","rawtypes","nls","serial",})
-public class mvc_View__generationControlerClasse_N2006728971 implements com.mia.studio.kernel.compiler.CompiledAction {
+public class mvc_View__declarationControlerAfficher_N1679376268 implements com.mia.studio.kernel.compiler.CompiledAction {
 
-	public mvc_View__generationControlerClasse_N2006728971() {
+	public mvc_View__declarationControlerAfficher_N1679376268() {
 		//Do nothing
 	}
 
 	//For internal use only
-	mvc_View__generationControlerClasse_N2006728971(int anyInt, List anyList) {
+	mvc_View__declarationControlerAfficher_N1679376268(int anyInt, List anyList) {
 		List<java.lang.Integer> otherList = anyList;
 		throw new java.lang.UnsupportedOperationException();
 	}
@@ -38,7 +38,7 @@ public class mvc_View__generationControlerClasse_N2006728971 implements com.mia.
 				throw new IllegalArgumentException(
 						String.format(
 								"Bad parameter type in call to %s. Found '%s' when expected '%s'.",
-								"generationControlerClasse", argument.getClass().getName(),
+								"declarationControlerAfficher", argument.getClass().getName(),
 								expectedClass.getName()));
 			}
 		}
@@ -52,7 +52,7 @@ public class mvc_View__generationControlerClasse_N2006728971 implements com.mia.
 
 	public String runAction(java.lang.Object[] _action_parameters) {
 		if (_action_parameters.length != 3)
-			throw new IllegalArgumentException("Wrong number of parameters in call to ''generationControlerClasse''");
+			throw new IllegalArgumentException("Wrong number of parameters in call to ''declarationControlerAfficher''");
 
 		final com.mia.formation.mvc.View current = __check_arg__(com.mia.formation.mvc.View.class, _action_parameters[0]);
 		final com.mia.openapi.gen.Context context = __check_arg__(com.mia.openapi.gen.Context.class, _action_parameters[1]);
@@ -64,36 +64,13 @@ public class mvc_View__generationControlerClasse_N2006728971 implements com.mia.
 	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("package com.mia.banque.ui.controler.swt;");
-_template_buffer.append('\n');
-_template_buffer.append('\n');
+String res = "";
 
-_template_buffer.append(manager.action(current, "importControlerOutilsSwt"));_template_buffer.append('\n');
+for (Model elem : current.getModel().getOwnedElements()) {
+	res += manager.getString(elem, "implantationAfficher");
+}
 
-_template_buffer.append(manager.action(current, "importControlerFichiersProjet"));_template_buffer.append('\n');
-_template_buffer.append('\n');
-_template_buffer.append("public class ");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append("Controler implements I");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append("Controler {");
-_template_buffer.append('\n');
-_template_buffer.append("	");
-_template_buffer.append('\n');
-_template_buffer.append("	private ");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" view;");
-_template_buffer.append('\n');
-_template_buffer.append("	private I");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append(" model;");
-_template_buffer.append('\n');
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "constructorControlerDeclaration"));_template_buffer.append("	");
-_template_buffer.append('\n');
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "declarationControlerAfficher"));_template_buffer.append('\n');
-_template_buffer.append("}");
-return _template_buffer.toString();
+return res;
 
 }
 }

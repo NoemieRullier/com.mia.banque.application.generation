@@ -69,7 +69,7 @@ _template_buffer.append("	public void ");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append("(){");
 _template_buffer.append('\n');
 _template_buffer.append("		this.controler.");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(";");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("();");
 _template_buffer.append('\n');
 _template_buffer.append("	}");
 _template_buffer.append('\n');

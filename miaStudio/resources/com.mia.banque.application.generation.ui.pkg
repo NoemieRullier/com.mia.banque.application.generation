@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="com.mia.banque.application.generation.ui" METAMODEL="MVC" NUMBER="14"
+<PACKAGE NAME="com.mia.banque.application.generation.ui" METAMODEL="MVC" NUMBER="23"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="scenarioUi" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
@@ -14,6 +14,20 @@
 
 ]]></TEXT>
 	</SCRIPT>
+	<SCRIPT NAME="actionBoutonsImpl" META_OBJECT="Action" CATEGORY="default">
+		<TEXT><![CDATA[
+btn[[name]] = new Button(grpButtons, SWT.NONE);
+		btn[[name]].setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
+		btn[[name]].setText("[[name]]");
+		btn[[name]].addSelectionListener(new SelectionAdapter(){
+		        public void widgetSelected(SelectionEvent event)
+		        {
+		          [[name]]();
+		        }
+		      });
+		      
+]]></TEXT>
+	</SCRIPT>
 	<SCRIPT NAME="actionDeclaration" META_OBJECT="Action" CATEGORY="default">
 		<TEXT><![CDATA[
 	public void [[name]]();
@@ -23,9 +37,61 @@
 	<SCRIPT NAME="actionMethodesDeclaration" META_OBJECT="Action" CATEGORY="default">
 		<TEXT><![CDATA[
 	public void [[name]](){
-		this.controler.[[name]];
+		this.controler.[[name]]();
 	}
 
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="declarationVueListe" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+public List [[name]]List;
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="implantationGroupes" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+
+		// Liste
+		Group grp[[name]] = new Group(this, SWT.NONE);
+		grp[[name]].setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		grp[[name]].setText("Liste des [[name]]s");
+		grp[[name]].setLayout(new GridLayout());
+
+		this.[[name]]List = new List(grp[[name]], SWT.BORDER | SWT.V_SCROLL | SWT.SINGLE);
+		this.[[name]]List.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		
+		for (final com.mia.banque.model.I[[name]] elt : this.model.get[[name]]s()) {
+			this.[[name]]List.add(elt.toString());
+		}
+	
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="implantationVueElement" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+		// Liste
+		Group grp[[name]] = new Group(this, SWT.NONE);
+		grp[[name]].setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		grp[[name]].setText("Liste des [[name]]s");
+		grp[[name]].setLayout(new GridLayout());
+
+		this.[[name]]List = new List(grp[[name]], SWT.BORDER | SWT.V_SCROLL | SWT.SINGLE);
+		this.[[name]]List.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		
+		for (final I[[name]] elt : this.model.get[[name]]s()) {
+			this.[[name]]List.add(elt.toString());
+		}
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="ContentsProprietes" META_OBJECT="ModelProperty" CATEGORY="default">
+		<TEXT><![CDATA[
+Label lbl[[name]] = new Label(this, SWT.NONE);
+		lbl[[name]].setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
+				1, 1));
+		lbl[[name]].setText("[[name]]");
+
+		Text [[name]]Field = new Text(this, SWT.BORDER);
+		[[name]]Field.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
+		[[name]]Field.setText(this.model.get[[name]]());
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="constructeurDeclaration" META_OBJECT="View" CATEGORY="default">
@@ -42,20 +108,20 @@
 		createContents();
 	}
 	
-	private void createContents(){
+private void createContents(){
 		setText("[[description]]");
-		setSize(458, 308);
-		setLayout(new GridLayout(2, false));		
-		btnquitter = new Button(grpButtons, SWT.NONE);
-		btnquitter.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
-		btnquitter.setText("quitter");
-		btnquitter.addSelectionListener(new SelectionAdapter(){
-		        public void widgetSelected(SelectionEvent event)
-		        {
-		          quitter();
-		        }
-		      });
-		}    
+		setSize(458,308);
+		setLayout(new GridLayout(2, false));
+		
+		[[declarationContentsProprietes]]
+		[[declarationGroupes]]
+		
+		Group grpButtons = new Group(this, SWT.NONE);
+		grpButtons.setLayout(new GridLayout(2, false));
+		grpButtons.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		
+		[[declarationBoutonsImpl]]
+	}  
 		      
 	@Override
 	protected void checkSubclass() {
@@ -76,6 +142,40 @@ for (Action action : current.getActions()){
 return result;
 ]]></TEXT>
 	</TEXT_MACRO>
+	<TEXT_MACRO NAME="declarationBoutonsImpl" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String result = "";
+
+for (Action action : current.getActions()){
+	result += manager.getString(action, "actionBoutonsImpl");
+	
+}
+
+return result;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="declarationContentsProprietes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (ModelProperty property : current.getModel().getProperties()) {
+	res += manager.getString(property, "ContentsProprietes");
+}
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="declarationGroupes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (Model element : current.getModel().getOwnedElements()) {
+	res += manager.getString(element, "implantationGroupes");
+}
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
 	<TEXT_MACRO NAME="declarationMethodes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
 String result = "";
@@ -86,6 +186,17 @@ for (Action action : current.getActions()){
 }
 
 return result;
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="declarationVueListe" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (Model elem : current.getModel().getOwnedElements()) {
+	res += manager.getString(elem, "declarationVueListe");
+}
+
+return res;
 ]]></TEXT>
 	</TEXT_MACRO>
 	<SCRIPT NAME="generationClasse" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
@@ -99,6 +210,7 @@ public class [[name]] extends Shell implements I[[name]] {
 	
 	private I[[modelName]]Controler controler;
 	private I[[modelName]] model;
+	[[declarationVueListe]]
 	
 [[declarationBoutons]]	
 [[constructeurDeclaration]]	

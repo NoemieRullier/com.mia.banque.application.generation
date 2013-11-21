@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="com.mia.banque.application.generation.controler" METAMODEL="MVC" NUMBER="10"
+<PACKAGE NAME="com.mia.banque.application.generation.controler" METAMODEL="MVC" NUMBER="12"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="scenarioControler" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
@@ -12,6 +12,15 @@
 		<TEXT><![CDATA[
 	public void [[name]]();
 
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="implantationAfficher" META_OBJECT="Model" CATEGORY="default">
+		<TEXT><![CDATA[
+	public void afficher[[name]]() {
+	// Start of user code for afficher[[name]]
+
+	// End of user code for afficher[[name]]
+	}
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="constructorControlerDeclaration" META_OBJECT="View" CATEGORY="default">
@@ -49,6 +58,17 @@
 return current.getName().replace("View", "");
 ]]></TEXT>
 	</TEXT_MACRO>
+	<TEXT_MACRO NAME="declarationControlerAfficher" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+String res = "";
+
+for (Model elem : current.getModel().getOwnedElements()) {
+	res += manager.getString(elem, "implantationAfficher");
+}
+
+return res;
+]]></TEXT>
+	</TEXT_MACRO>
 	<TEXT_MACRO NAME="declarationControlerMethodes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
 String result = "";
@@ -74,6 +94,8 @@ public class [[controlerModelName]]Controler implements I[[controlerModelName]]C
 	private I[[controlerModelName]] model;
 
 [[constructorControlerDeclaration]]	
+
+[[declarationControlerAfficher]]
 }
 ]]></TEXT>
 		<PROPERTY NAME="Filename"/>
@@ -89,6 +111,8 @@ package com.mia.banque.ui.controler;
 
 public interface I[[controlerModelName]]Controler {
 	
+	public void initView();
+	
 [[declarationControlerMethodes]]
 }
 ]]></TEXT>
@@ -100,6 +124,15 @@ src/com/mia/banque/ui/controler/I[[controlerModelName]]Controler.java
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="importControlerFichiersProjet" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+import com.mia.banque.ui.controler.I[[controlerModelName]]Controler;
+import com.mia.banque.ui.view.I[[name]];
+import com.mia.banque.ui.view.swt.[[name]];
+import com.mia.banque.model.I[[controlerModelName]];
+
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="importControlerOutilsSwt" META_OBJECT="View" CATEGORY="default">
 		<TEXT><![CDATA[
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -113,15 +146,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Group;
-
-]]></TEXT>
-	</SCRIPT>
-	<SCRIPT NAME="importControlerOutilsSwt" META_OBJECT="View" CATEGORY="default">
-		<TEXT><![CDATA[
-import com.mia.banque.ui.controler.I[[controlerModelName]]Controler;
-import com.mia.banque.ui.view.I[[name]];
-import com.mia.banque.ui.view.swt.[[name]];
-import com.mia.banque.model.I[[controlerModelName]];
 
 ]]></TEXT>
 	</SCRIPT>

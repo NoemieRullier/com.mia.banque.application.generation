@@ -13,14 +13,14 @@ import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.*;
 
 @SuppressWarnings({"unused","unchecked","rawtypes","nls","serial",})
-public class mvc_View__generationClasse_N502227313 implements com.mia.studio.kernel.compiler.CompiledAction {
+public class mvc_ModelProperty__ContentsProprietes_N1716485622 implements com.mia.studio.kernel.compiler.CompiledAction {
 
-	public mvc_View__generationClasse_N502227313() {
+	public mvc_ModelProperty__ContentsProprietes_N1716485622() {
 		//Do nothing
 	}
 
 	//For internal use only
-	mvc_View__generationClasse_N502227313(int anyInt, List anyList) {
+	mvc_ModelProperty__ContentsProprietes_N1716485622(int anyInt, List anyList) {
 		List<java.lang.Integer> otherList = anyList;
 		throw new java.lang.UnsupportedOperationException();
 	}
@@ -38,7 +38,7 @@ public class mvc_View__generationClasse_N502227313 implements com.mia.studio.ker
 				throw new IllegalArgumentException(
 						String.format(
 								"Bad parameter type in call to %s. Found '%s' when expected '%s'.",
-								"generationClasse", argument.getClass().getName(),
+								"ContentsProprietes", argument.getClass().getName(),
 								expectedClass.getName()));
 			}
 		}
@@ -52,54 +52,43 @@ public class mvc_View__generationClasse_N502227313 implements com.mia.studio.ker
 
 	public String runAction(java.lang.Object[] _action_parameters) {
 		if (_action_parameters.length != 3)
-			throw new IllegalArgumentException("Wrong number of parameters in call to ''generationClasse''");
+			throw new IllegalArgumentException("Wrong number of parameters in call to ''ContentsProprietes''");
 
-		final com.mia.formation.mvc.View current = __check_arg__(com.mia.formation.mvc.View.class, _action_parameters[0]);
+		final com.mia.formation.mvc.ModelProperty current = __check_arg__(com.mia.formation.mvc.ModelProperty.class, _action_parameters[0]);
 		final com.mia.openapi.gen.Context context = __check_arg__(com.mia.openapi.gen.Context.class, _action_parameters[1]);
 		final com.mia.openapi.gen.GenerationServicesManager manager = __check_arg__(com.mia.openapi.gen.GenerationServicesManager.class, _action_parameters[2]);
 
 		return __invoke_user_code__(current, context, manager);
 	}
 
-	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
+	public String __invoke_user_code__(final com.mia.formation.mvc.ModelProperty current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("package com.mia.banque.ui.view.swt;");
+_template_buffer.append("Label lbl");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" = new Label(this, SWT.NONE);");
+_template_buffer.append('\n');
+_template_buffer.append("		lbl");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append(".setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,");
+_template_buffer.append('\n');
+_template_buffer.append("				1, 1));");
+_template_buffer.append('\n');
+_template_buffer.append("		lbl");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append(".setText(\"");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("\");");
 _template_buffer.append('\n');
 _template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "importOutilsSwt"));_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "importFichiersProjet"));_template_buffer.append('\n');
+_template_buffer.append("		Text ");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("Field = new Text(this, SWT.BORDER);");
 _template_buffer.append('\n');
-_template_buffer.append("public class ");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" extends Shell implements I");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" {");
+_template_buffer.append("		");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("Field.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,");
 _template_buffer.append('\n');
-_template_buffer.append("	");
+_template_buffer.append("				false, 1, 1));");
 _template_buffer.append('\n');
-_template_buffer.append("	private I");
-_template_buffer.append(manager.action(current, "modelName"));_template_buffer.append("Controler controler;");
-_template_buffer.append('\n');
-_template_buffer.append("	private I");
-_template_buffer.append(manager.action(current, "modelName"));_template_buffer.append(" model;");
-_template_buffer.append('\n');
-_template_buffer.append("	");
-_template_buffer.append(manager.action(current, "declarationVueListe"));_template_buffer.append('\n');
-_template_buffer.append("	");
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "declarationBoutons"));_template_buffer.append("	");
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "constructeurDeclaration"));_template_buffer.append("	");
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "implantationMethodes"));_template_buffer.append('\n');
-_template_buffer.append("	");
-_template_buffer.append('\n');
-_template_buffer.append("}");
+_template_buffer.append("		");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("Field.setText(this.model.get");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append("());");
 return _template_buffer.toString();
 
 }

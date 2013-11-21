@@ -65,29 +65,17 @@ public class mvc_View__importControlerFichiersProjet_2051098828 implements com.m
 {
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("import org.eclipse.swt.SWT;");
+_template_buffer.append("import com.mia.banque.ui.controler.I");
+_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append("Controler;");
 _template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.events.SelectionAdapter;");
+_template_buffer.append("import com.mia.banque.ui.view.I");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append(";");
 _template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.events.SelectionEvent;");
+_template_buffer.append("import com.mia.banque.ui.view.swt.");
+_template_buffer.append(manager.action(current, "name"));_template_buffer.append(";");
 _template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.layout.GridData;");
-_template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.layout.GridLayout;");
-_template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.widgets.Button;");
-_template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.widgets.Display;");
-_template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.widgets.Label;");
-_template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.widgets.Shell;");
-_template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.widgets.Text;");
-_template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.widgets.List;");
-_template_buffer.append('\n');
-_template_buffer.append("import org.eclipse.swt.widgets.Group;");
+_template_buffer.append("import com.mia.banque.model.I");
+_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append(";");
 _template_buffer.append('\n');
 
 return _template_buffer.toString();

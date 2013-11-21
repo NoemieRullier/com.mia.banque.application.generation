@@ -13,14 +13,14 @@ import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.*;
 
 @SuppressWarnings({"unused","unchecked","rawtypes","nls","serial",})
-public class mvc_View__generationClasse_N502227313 implements com.mia.studio.kernel.compiler.CompiledAction {
+public class mvc_View__declarationGroupes_N2048309379 implements com.mia.studio.kernel.compiler.CompiledAction {
 
-	public mvc_View__generationClasse_N502227313() {
+	public mvc_View__declarationGroupes_N2048309379() {
 		//Do nothing
 	}
 
 	//For internal use only
-	mvc_View__generationClasse_N502227313(int anyInt, List anyList) {
+	mvc_View__declarationGroupes_N2048309379(int anyInt, List anyList) {
 		List<java.lang.Integer> otherList = anyList;
 		throw new java.lang.UnsupportedOperationException();
 	}
@@ -38,7 +38,7 @@ public class mvc_View__generationClasse_N502227313 implements com.mia.studio.ker
 				throw new IllegalArgumentException(
 						String.format(
 								"Bad parameter type in call to %s. Found '%s' when expected '%s'.",
-								"generationClasse", argument.getClass().getName(),
+								"declarationGroupes", argument.getClass().getName(),
 								expectedClass.getName()));
 			}
 		}
@@ -52,7 +52,7 @@ public class mvc_View__generationClasse_N502227313 implements com.mia.studio.ker
 
 	public String runAction(java.lang.Object[] _action_parameters) {
 		if (_action_parameters.length != 3)
-			throw new IllegalArgumentException("Wrong number of parameters in call to ''generationClasse''");
+			throw new IllegalArgumentException("Wrong number of parameters in call to ''declarationGroupes''");
 
 		final com.mia.formation.mvc.View current = __check_arg__(com.mia.formation.mvc.View.class, _action_parameters[0]);
 		final com.mia.openapi.gen.Context context = __check_arg__(com.mia.openapi.gen.Context.class, _action_parameters[1]);
@@ -64,43 +64,13 @@ public class mvc_View__generationClasse_N502227313 implements com.mia.studio.ker
 	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
-_template_buffer.append("package com.mia.banque.ui.view.swt;");
-_template_buffer.append('\n');
-_template_buffer.append('\n');
+String res = "";
 
-_template_buffer.append(manager.action(current, "importOutilsSwt"));_template_buffer.append('\n');
+for (Model element : current.getModel().getOwnedElements()) {
+	res += manager.getString(element, "implantationGroupes");
+}
 
-_template_buffer.append(manager.action(current, "importFichiersProjet"));_template_buffer.append('\n');
-_template_buffer.append('\n');
-_template_buffer.append("public class ");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" extends Shell implements I");
-_template_buffer.append(manager.action(current, "name"));_template_buffer.append(" {");
-_template_buffer.append('\n');
-_template_buffer.append("	");
-_template_buffer.append('\n');
-_template_buffer.append("	private I");
-_template_buffer.append(manager.action(current, "modelName"));_template_buffer.append("Controler controler;");
-_template_buffer.append('\n');
-_template_buffer.append("	private I");
-_template_buffer.append(manager.action(current, "modelName"));_template_buffer.append(" model;");
-_template_buffer.append('\n');
-_template_buffer.append("	");
-_template_buffer.append(manager.action(current, "declarationVueListe"));_template_buffer.append('\n');
-_template_buffer.append("	");
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "declarationBoutons"));_template_buffer.append("	");
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "constructeurDeclaration"));_template_buffer.append("	");
-_template_buffer.append('\n');
-
-_template_buffer.append(manager.action(current, "implantationMethodes"));_template_buffer.append('\n');
-_template_buffer.append("	");
-_template_buffer.append('\n');
-_template_buffer.append("}");
-return _template_buffer.toString();
+return res;
 
 }
 }
