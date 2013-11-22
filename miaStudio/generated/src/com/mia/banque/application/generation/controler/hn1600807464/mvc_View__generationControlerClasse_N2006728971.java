@@ -69,13 +69,13 @@ _template_buffer.append("package com.mia.banque.ui.controler.swt;");
 _template_buffer.append('\n');
 _template_buffer.append('\n');
 
-_template_buffer.append(manager.action(current, "importControlerOutilsSwt"));_template_buffer.append('\n');
+_template_buffer.append(manager.action(current, "ImportControlerSwtTools"));_template_buffer.append('\n');
 
-_template_buffer.append(manager.action(current, "importControlerFichiersProjet"));_template_buffer.append('\n');
+_template_buffer.append(manager.action(current, "ImportControlerFilesProject"));_template_buffer.append('\n');
 _template_buffer.append('\n');
 _template_buffer.append("public class ");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append("Controler implements I");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append("Controler {");
+_template_buffer.append(manager.action(current, "MacroControlerModelName"));_template_buffer.append("Controler implements I");
+_template_buffer.append(manager.action(current, "MacroControlerModelName"));_template_buffer.append("Controler {");
 _template_buffer.append('\n');
 _template_buffer.append("	");
 _template_buffer.append('\n');
@@ -83,15 +83,15 @@ _template_buffer.append("	private ");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append(" view;");
 _template_buffer.append('\n');
 _template_buffer.append("	private I");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append(" model;");
+_template_buffer.append(manager.action(current, "MacroControlerModelName"));_template_buffer.append(" model;");
 _template_buffer.append('\n');
 _template_buffer.append('\n');
 
-_template_buffer.append(manager.action(current, "constructorControlerDeclaration"));_template_buffer.append("	");
+_template_buffer.append(manager.action(current, "ConstructorControlerDeclaration"));_template_buffer.append("	");
 _template_buffer.append('\n');
 _template_buffer.append('\n');
 
-_template_buffer.append(manager.action(current, "declarationControlerAfficher"));_template_buffer.append('\n');
+_template_buffer.append(manager.action(current, "MacroControlerDeclarationAfficher"));_template_buffer.append('\n');
 _template_buffer.append("}");
 return _template_buffer.toString();
 

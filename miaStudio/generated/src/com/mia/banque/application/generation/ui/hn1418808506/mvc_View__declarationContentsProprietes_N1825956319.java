@@ -64,13 +64,7 @@ public class mvc_View__declarationContentsProprietes_N1825956319 implements com.
 	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-String res = "";
-
-for (ModelProperty property : current.getModel().getProperties()) {
-	res += manager.getString(property, "ContentsProprietes");
-}
-
-return res;
+return manager.apply(current.getModel().getProperties(), "ContentsProperties");
 
 }
 }

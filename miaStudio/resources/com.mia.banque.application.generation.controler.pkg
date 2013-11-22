@@ -3,7 +3,7 @@
 <PACKAGE NAME="com.mia.banque.application.generation.controler" METAMODEL="MVC" NUMBER="12"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
-	<SCENARIO NAME="scenarioControler" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
+	<SCENARIO NAME="ScenarioControler" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
 		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="View"/>
 		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.controler" META_OBJECT="View" CATEGORY="default" NAME="generationControlerClasse" PARAM_COUNT="0"/>
 		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.controler" META_OBJECT="View" CATEGORY="default" NAME="generationControlerInterface" PARAM_COUNT="0"/>
@@ -14,7 +14,7 @@
 
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="implantationAfficher" META_OBJECT="Model" CATEGORY="default">
+	<SCRIPT NAME="TextTemplateAfficherImplementation" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
 	public void afficher[[name]]() {
 	// Start of user code for afficher[[name]]
@@ -23,9 +23,9 @@
 	}
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="constructorControlerDeclaration" META_OBJECT="View" CATEGORY="default">
+	<SCRIPT NAME="ConstructorControlerDeclaration" META_OBJECT="View" CATEGORY="default">
 		<TEXT><![CDATA[
-	public [[controlerModelName]]Controler(com.mia.banque.model.I[[modelName]] model) {
+	public [[MacroControlerModelName]]Controler(com.mia.banque.model.I[[MacroControlerModelName]] model) {
 		this.model = model;
 	}
 
@@ -53,86 +53,16 @@
 	
 ]]></TEXT>
 	</SCRIPT>
-	<TEXT_MACRO NAME="controlerModelName" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+	<SCRIPT NAME="ImportControlerFilesProject" META_OBJECT="View" CATEGORY="default">
 		<TEXT><![CDATA[
-return current.getName().replace("View", "");
-]]></TEXT>
-	</TEXT_MACRO>
-	<TEXT_MACRO NAME="declarationControlerAfficher" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
-		<TEXT><![CDATA[
-String res = "";
-
-for (Model elem : current.getModel().getOwnedElements()) {
-	res += manager.getString(elem, "implantationAfficher");
-}
-
-return res;
-]]></TEXT>
-	</TEXT_MACRO>
-	<TEXT_MACRO NAME="declarationControlerMethodes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
-		<TEXT><![CDATA[
-String result = "";
-
-for (Action action : current.getActions()){
-	result += manager.getString(action, "actionControlerDeclaration");
-	result += "\n"; // Identation et lisibilite du fichier genere
-}
-
-return result;
-]]></TEXT>
-	</TEXT_MACRO>
-	<SCRIPT NAME="generationControlerClasse" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
-		<TEXT><![CDATA[
-package com.mia.banque.ui.controler.swt;
-
-[[importControlerOutilsSwt]]
-[[importControlerFichiersProjet]]
-
-public class [[controlerModelName]]Controler implements I[[controlerModelName]]Controler {
-	
-	private [[name]] view;
-	private I[[controlerModelName]] model;
-
-[[constructorControlerDeclaration]]	
-
-[[declarationControlerAfficher]]
-}
-]]></TEXT>
-		<PROPERTY NAME="Filename"/>
-	</SCRIPT>
-	<SCRIPT NAME="generationControlerClasse$Filename" META_OBJECT="View" CATEGORY="default">
-		<TEXT><![CDATA[
-src/com/mia/banque/ui/controler/swt/[[controlerModelName]]Controler.java
-]]></TEXT>
-	</SCRIPT>
-	<SCRIPT NAME="generationControlerInterface" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
-		<TEXT><![CDATA[
-package com.mia.banque.ui.controler;
-
-public interface I[[controlerModelName]]Controler {
-	
-	public void initView();
-	
-[[declarationControlerMethodes]]
-}
-]]></TEXT>
-		<PROPERTY NAME="Filename"/>
-	</SCRIPT>
-	<SCRIPT NAME="generationControlerInterface$Filename" META_OBJECT="View" CATEGORY="default">
-		<TEXT><![CDATA[
-src/com/mia/banque/ui/controler/I[[controlerModelName]]Controler.java
-]]></TEXT>
-	</SCRIPT>
-	<SCRIPT NAME="importControlerFichiersProjet" META_OBJECT="View" CATEGORY="default">
-		<TEXT><![CDATA[
-import com.mia.banque.ui.controler.I[[controlerModelName]]Controler;
+import com.mia.banque.ui.controler.I[[MacroControlerModelName]]Controler;
 import com.mia.banque.ui.view.I[[name]];
 import com.mia.banque.ui.view.swt.[[name]];
-import com.mia.banque.model.I[[controlerModelName]];
+import com.mia.banque.model.I[[MacroControlerModelName]];
 
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="importControlerOutilsSwt" META_OBJECT="View" CATEGORY="default">
+	<SCRIPT NAME="ImportControlerSwtTools" META_OBJECT="View" CATEGORY="default">
 		<TEXT><![CDATA[
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -147,6 +77,82 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Group;
 
+]]></TEXT>
+	</SCRIPT>
+	<TEXT_MACRO NAME="MacroControlerDeclarationAfficher" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getModel().getOwnedElements(), "TextTemplateAfficherImplementation");
+
+/*
+for (Model elem : current.getModel().getOwnedElements()) {
+	res += manager.getString(elem, "implantationAfficher");
+}
+
+return res;
+*/
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroControlerDeclarationMethodes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getActions(), "actionControlerDeclaration");
+
+/*
+String result = "";
+
+for (Action action : current.getActions()){
+	result += manager.getString(action, "actionControlerDeclaration");
+	result += "\n"; // Identation et lisibilite du fichier genere
+}
+
+return result;
+*/
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroControlerModelName" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return current.getModel().getName();
+]]></TEXT>
+	</TEXT_MACRO>
+	<SCRIPT NAME="generationControlerClasse" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package com.mia.banque.ui.controler.swt;
+
+[[ImportControlerSwtTools]]
+[[ImportControlerFilesProject]]
+
+public class [[MacroControlerModelName]]Controler implements I[[MacroControlerModelName]]Controler {
+	
+	private [[name]] view;
+	private I[[MacroControlerModelName]] model;
+
+[[ConstructorControlerDeclaration]]	
+
+[[MacroControlerDeclarationAfficher]]
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="generationControlerClasse$Filename" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+src/com/mia/banque/ui/controler/swt/[[MacroControlerModelName]]Controler.java
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="generationControlerInterface" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package com.mia.banque.ui.controler;
+
+public interface I[[MacroControlerModelName]]Controler {
+	
+	public void initView();
+	
+[[MacroControlerDeclarationMethodes]]
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="generationControlerInterface$Filename" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+src/com/mia/banque/ui/controler/I[[MacroControlerModelName]]Controler.java
 ]]></TEXT>
 	</SCRIPT>
 </PACKAGE>

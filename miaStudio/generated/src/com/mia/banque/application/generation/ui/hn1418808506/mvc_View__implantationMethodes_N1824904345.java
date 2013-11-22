@@ -64,14 +64,7 @@ public class mvc_View__implantationMethodes_N1824904345 implements com.mia.studi
 	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-String result = "";
-
-for (Action action : current.getActions()){
-	result += manager.getString(action, "actionMethodesDeclaration");
-	
-}
-
-return result;
+return manager.apply(current.getActions(), "TextTemplateMethodsDeclaration");
 
 }
 }

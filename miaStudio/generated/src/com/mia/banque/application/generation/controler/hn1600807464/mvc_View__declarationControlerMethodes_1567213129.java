@@ -64,6 +64,9 @@ public class mvc_View__declarationControlerMethodes_1567213129 implements com.mi
 	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
+return manager.apply(current.getActions(), "actionControlerDeclaration");
+
+/*
 String result = "";
 
 for (Action action : current.getActions()){
@@ -72,6 +75,7 @@ for (Action action : current.getActions()){
 }
 
 return result;
+*/
 
 }
 }

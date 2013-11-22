@@ -15,4 +15,8 @@
       <package file="miaStudio/resources/com.mia.banque.application.generation.controler.pkg"/>
    </extension>
    
+   
+   <extension point="com.mia.studio.generation.core.generation_package">
+      <package file="miaStudio/resources/com.mia.banque.application.generation.all.pkg"/>
+   </extension>
 </plugin>

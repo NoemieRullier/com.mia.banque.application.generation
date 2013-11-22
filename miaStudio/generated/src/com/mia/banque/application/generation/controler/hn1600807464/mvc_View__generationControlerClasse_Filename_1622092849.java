@@ -66,7 +66,7 @@ public class mvc_View__generationControlerClasse_Filename_1622092849 implements 
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
 _template_buffer.append("src/com/mia/banque/ui/controler/swt/");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append("Controler.java");
+_template_buffer.append(manager.action(current, "MacroControlerModelName"));_template_buffer.append("Controler.java");
 return _template_buffer.toString();
 
 }

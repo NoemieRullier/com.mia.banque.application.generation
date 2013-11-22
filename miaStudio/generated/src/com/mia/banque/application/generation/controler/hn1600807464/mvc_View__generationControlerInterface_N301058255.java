@@ -69,7 +69,7 @@ _template_buffer.append("package com.mia.banque.ui.controler;");
 _template_buffer.append('\n');
 _template_buffer.append('\n');
 _template_buffer.append("public interface I");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append("Controler {");
+_template_buffer.append(manager.action(current, "MacroControlerModelName"));_template_buffer.append("Controler {");
 _template_buffer.append('\n');
 _template_buffer.append("	");
 _template_buffer.append('\n');
@@ -78,7 +78,7 @@ _template_buffer.append('\n');
 _template_buffer.append("	");
 _template_buffer.append('\n');
 
-_template_buffer.append(manager.action(current, "declarationControlerMethodes"));_template_buffer.append('\n');
+_template_buffer.append(manager.action(current, "MacroControlerDeclarationMethodes"));_template_buffer.append('\n');
 _template_buffer.append("}");
 return _template_buffer.toString();
 

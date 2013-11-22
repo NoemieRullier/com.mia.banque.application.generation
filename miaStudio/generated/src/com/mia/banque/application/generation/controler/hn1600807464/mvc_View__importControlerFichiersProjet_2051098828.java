@@ -66,7 +66,7 @@ public class mvc_View__importControlerFichiersProjet_2051098828 implements com.m
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
 _template_buffer.append("import com.mia.banque.ui.controler.I");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append("Controler;");
+_template_buffer.append(manager.action(current, "MacroControlerModelName"));_template_buffer.append("Controler;");
 _template_buffer.append('\n');
 _template_buffer.append("import com.mia.banque.ui.view.I");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append(";");
@@ -75,7 +75,7 @@ _template_buffer.append("import com.mia.banque.ui.view.swt.");
 _template_buffer.append(manager.action(current, "name"));_template_buffer.append(";");
 _template_buffer.append('\n');
 _template_buffer.append("import com.mia.banque.model.I");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append(";");
+_template_buffer.append(manager.action(current, "MacroControlerModelName"));_template_buffer.append(";");
 _template_buffer.append('\n');
 
 return _template_buffer.toString();

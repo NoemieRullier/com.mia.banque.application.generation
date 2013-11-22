@@ -64,13 +64,15 @@ public class mvc_View__declarationControlerAfficher_N1679376268 implements com.m
 	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-String res = "";
+return manager.apply(current.getModel().getOwnedElements(), "TextTemplateAfficherImplementation");
 
+/*
 for (Model elem : current.getModel().getOwnedElements()) {
 	res += manager.getString(elem, "implantationAfficher");
 }
 
 return res;
+*/
 
 }
 }

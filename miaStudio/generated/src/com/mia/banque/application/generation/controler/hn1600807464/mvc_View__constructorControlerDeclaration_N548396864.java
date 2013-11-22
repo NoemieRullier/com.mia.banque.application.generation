@@ -66,7 +66,7 @@ public class mvc_View__constructorControlerDeclaration_N548396864 implements com
 
 java.lang.StringBuffer _template_buffer = new java.lang.StringBuffer();
 _template_buffer.append("	public ");
-_template_buffer.append(manager.action(current, "controlerModelName"));_template_buffer.append("Controler(com.mia.banque.model.I");
+_template_buffer.append(manager.action(current, "MacroControlerModelName"));_template_buffer.append("Controler(com.mia.banque.model.I");
 _template_buffer.append(manager.action(current, "modelName"));_template_buffer.append(" model) {");
 _template_buffer.append('\n');
 _template_buffer.append("		this.model = model;");

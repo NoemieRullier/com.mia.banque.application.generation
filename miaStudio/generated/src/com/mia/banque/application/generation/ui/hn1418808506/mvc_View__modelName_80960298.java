@@ -64,7 +64,7 @@ public class mvc_View__modelName_80960298 implements com.mia.studio.kernel.compi
 	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-return current.getName().replace("View", "");
+return current.getModel().getName();
 
 }
 }

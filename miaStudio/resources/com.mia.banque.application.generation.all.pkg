@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PACKAGE SYSTEM "package.dtd">
+<PACKAGE NAME="com.mia.banque.application.generation.all" METAMODEL="MVC" NUMBER="1"
+ DOCUMENTATION="">
+	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
+	<SCENARIO NAME="ScenarioAll" VISIBILITY="public" META_OBJECT="UIApplication" CATEGORY="default" DOCUMENTATION="">
+		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="UIApplication"/>
+		<GENERATION_STEP TYPE="Scenario" PACKAGE="com.mia.banque.application.generation.all" META_OBJECT="UIApplication" NAME="ScenarioCallingModel"/>
+		<GENERATION_STEP TYPE="Scenario" PACKAGE="com.mia.banque.application.generation.all" META_OBJECT="UIApplication" NAME="ScenarioCallingViewAndController"/>
+	</SCENARIO>
+	<SCENARIO NAME="ScenarioCallingModel" VISIBILITY="private" META_OBJECT="UIApplication" CATEGORY="default" DOCUMENTATION="">
+		<SERVICE_CALL NAME="Service" PACKAGE="com.mia.banque.application.generation.all" META_OBJECT="UIApplication"/>
+		<GENERATION_STEP TYPE="Scenario" PACKAGE="com.mia.banque.application.generation.model" META_OBJECT="Model" NAME="ScenarioModel"/>
+	</SCENARIO>
+	<SCENARIO NAME="ScenarioCallingViewAndController" VISIBILITY="private" META_OBJECT="UIApplication" CATEGORY="default" DOCUMENTATION="">
+		<SERVICE_CALL NAME="pages" PACKAGE="System" META_OBJECT="UIApplication"/>
+		<GENERATION_STEP TYPE="Scenario" PACKAGE="com.mia.banque.application.generation.ui" META_OBJECT="View" NAME="ScenarioUi"/>
+		<GENERATION_STEP TYPE="Scenario" PACKAGE="com.mia.banque.application.generation.controler" META_OBJECT="View" NAME="ScenarioControler"/>
+	</SCENARIO>
+	<SERVICE_MACRO NAME="Service" META_OBJECT="UIApplication" CATEGORY="default" RETURN_TYPE="Model">
+		<TEXT><![CDATA[
+return manager.allOfClass("Model");
+]]></TEXT>
+	</SERVICE_MACRO>
+</PACKAGE>

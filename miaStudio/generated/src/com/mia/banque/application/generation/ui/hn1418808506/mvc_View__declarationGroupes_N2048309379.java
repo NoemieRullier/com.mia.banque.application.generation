@@ -64,13 +64,7 @@ public class mvc_View__declarationGroupes_N2048309379 implements com.mia.studio.
 	public String __invoke_user_code__(final com.mia.formation.mvc.View current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-String res = "";
-
-for (Model element : current.getModel().getOwnedElements()) {
-	res += manager.getString(element, "implantationGroupes");
-}
-
-return res;
+return manager.apply(current.getModel().getOwnedElements(), "implantationGroupes");
 
 }
 }

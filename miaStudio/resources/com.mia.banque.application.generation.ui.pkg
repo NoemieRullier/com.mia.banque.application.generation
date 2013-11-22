@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="com.mia.banque.application.generation.ui" METAMODEL="MVC" NUMBER="23"
+<PACKAGE NAME="com.mia.banque.application.generation.ui" METAMODEL="MVC" NUMBER="22"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
-	<SCENARIO NAME="scenarioUi" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
+	<SCENARIO NAME="ScenarioUi" VISIBILITY="public" META_OBJECT="View" CATEGORY="default" DOCUMENTATION="">
 		<SERVICE_CALL NAME="current" PACKAGE="System" META_OBJECT="View"/>
-		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.ui" META_OBJECT="View" CATEGORY="default" NAME="generationClasse" PARAM_COUNT="0"/>
-		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.ui" META_OBJECT="View" CATEGORY="default" NAME="generationInterface" PARAM_COUNT="0"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.ui" META_OBJECT="View" CATEGORY="default" NAME="FileTemplateClassGeneration" PARAM_COUNT="0"/>
+		<GENERATION_STEP TYPE="FileTemplate" PACKAGE="com.mia.banque.application.generation.ui" META_OBJECT="View" CATEGORY="default" NAME="FileTemplateInterfaceGeneration" PARAM_COUNT="0"/>
 	</SCENARIO>
-	<SCRIPT NAME="actionBoutonsDeclaration" META_OBJECT="Action" CATEGORY="default">
+	<SCRIPT NAME="TextTemplateButtonDeclaration" META_OBJECT="Action" CATEGORY="default">
 		<TEXT><![CDATA[
 	private Button btn[[name]];
 
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="actionBoutonsImpl" META_OBJECT="Action" CATEGORY="default">
+	<SCRIPT NAME="TextTemplateButtonImplementation" META_OBJECT="Action" CATEGORY="default">
 		<TEXT><![CDATA[
 btn[[name]] = new Button(grpButtons, SWT.NONE);
 		btn[[name]].setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
@@ -28,13 +28,13 @@ btn[[name]] = new Button(grpButtons, SWT.NONE);
 		      
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="actionDeclaration" META_OBJECT="Action" CATEGORY="default">
+	<SCRIPT NAME="TextTemplateMethodDeclaration" META_OBJECT="Action" CATEGORY="default">
 		<TEXT><![CDATA[
 	public void [[name]]();
 
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="actionMethodesDeclaration" META_OBJECT="Action" CATEGORY="default">
+	<SCRIPT NAME="TextTemplateMethodImplementation" META_OBJECT="Action" CATEGORY="default">
 		<TEXT><![CDATA[
 	public void [[name]](){
 		this.controler.[[name]]();
@@ -42,12 +42,7 @@ btn[[name]] = new Button(grpButtons, SWT.NONE);
 
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="declarationVueListe" META_OBJECT="Model" CATEGORY="default">
-		<TEXT><![CDATA[
-public List [[name]]List;
-]]></TEXT>
-	</SCRIPT>
-	<SCRIPT NAME="implantationGroupes" META_OBJECT="Model" CATEGORY="default">
+	<SCRIPT NAME="TextTemplateGroupsImplementation" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
 
 		// Liste
@@ -65,23 +60,12 @@ public List [[name]]List;
 	
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="implantationVueElement" META_OBJECT="Model" CATEGORY="default">
+	<SCRIPT NAME="TextTemplateListViewDeclaration" META_OBJECT="Model" CATEGORY="default">
 		<TEXT><![CDATA[
-		// Liste
-		Group grp[[name]] = new Group(this, SWT.NONE);
-		grp[[name]].setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		grp[[name]].setText("Liste des [[name]]s");
-		grp[[name]].setLayout(new GridLayout());
-
-		this.[[name]]List = new List(grp[[name]], SWT.BORDER | SWT.V_SCROLL | SWT.SINGLE);
-		this.[[name]]List.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
-		for (final I[[name]] elt : this.model.get[[name]]s()) {
-			this.[[name]]List.add(elt.toString());
-		}
+public List [[name]]List;
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="ContentsProprietes" META_OBJECT="ModelProperty" CATEGORY="default">
+	<SCRIPT NAME="TextTemplateContentsProperties" META_OBJECT="ModelProperty" CATEGORY="default">
 		<TEXT><![CDATA[
 Label lbl[[name]] = new Label(this, SWT.NONE);
 		lbl[[name]].setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
@@ -94,13 +78,95 @@ Label lbl[[name]] = new Label(this, SWT.NONE);
 		[[name]]Field.setText(this.model.get[[name]]());
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="constructeurDeclaration" META_OBJECT="View" CATEGORY="default">
+	<SCRIPT NAME="FileTemplateClassGeneration" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package com.mia.banque.ui.view.swt;
+
+[[TextTemplateImportSwtTools]]
+[[TextTemplateImportFilesProject]]
+
+public class [[name]] extends Shell implements I[[name]] {
+	
+	private I[[MacroModelName]]Controler controler;
+	private I[[MacroModelName]] model;
+	[[MacroListViewDeclaration]]
+	
+[[MacroButtonsDeclaration]]	
+[[TextTemplateConstructorDeclaration]]	
+[[MacroMethodsImplementation]]
+	
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="FileTemplateClassGeneration$Filename" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+src/com/mia/banque/ui/view/swt/[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<SCRIPT NAME="FileTemplateInterfaceGeneration" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
+		<TEXT><![CDATA[
+package com.mia.banque.ui.view;
+
+public interface I[[name]] {
+	
+[[MacroMethodsDeclaration]]
+}
+]]></TEXT>
+		<PROPERTY NAME="Filename"/>
+	</SCRIPT>
+	<SCRIPT NAME="FileTemplateInterfaceGeneration$Filename" META_OBJECT="View" CATEGORY="default">
+		<TEXT><![CDATA[
+src/com/mia/banque/ui/view/I[[name]].java
+]]></TEXT>
+	</SCRIPT>
+	<TEXT_MACRO NAME="MacroButtonsDeclaration" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getActions(), "TextTemplateButtonDeclaration");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroButtonsImplementation" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getActions(), "TextTemplateButtonImplementation");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroContentsProperties" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getModel().getProperties(), "TextTemplateContentsProperties");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroGroupsImplementation" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getModel().getOwnedElements(), "TextTemplateGroupsImplementation");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroListViewDeclaration" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getModel().getOwnedElements(), "TextTemplateListViewDeclaration");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroMethodsDeclaration" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getActions(), "TextTemplateMethodDeclaration");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroMethodsImplementation" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getActions(), "TextTemplateMethodImplementation");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroModelName" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return current.getModel().getName();
+]]></TEXT>
+	</TEXT_MACRO>
+	<SCRIPT NAME="TextTemplateConstructorDeclaration" META_OBJECT="View" CATEGORY="default">
 		<TEXT><![CDATA[
 	/**
 	 * Create the shell.
 	 * @param display
 	 */
-	public [[name]](Display display, com.mia.banque.model.I[[modelName]] model, I[[modelName]]Controler controler) {
+	public [[name]](Display display, com.mia.banque.model.I[[MacroModelName]] model, I[[MacroModelName]]Controler controler) {
 		super(display, SWT.SHELL_TRIM);
 		this.model = model;
 		this.controler = controler;
@@ -113,14 +179,14 @@ private void createContents(){
 		setSize(458,308);
 		setLayout(new GridLayout(2, false));
 		
-		[[declarationContentsProprietes]]
-		[[declarationGroupes]]
+		[[MacroContentsProperties]]
+		[[MacroGroupsImplementation]]
 		
 		Group grpButtons = new Group(this, SWT.NONE);
 		grpButtons.setLayout(new GridLayout(2, false));
 		grpButtons.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		
-		[[declarationBoutonsImpl]]
+		[[MacroButtonsImplementation]]
 	}  
 		      
 	@Override
@@ -130,137 +196,14 @@ private void createContents(){
 	
 ]]></TEXT>
 	</SCRIPT>
-	<TEXT_MACRO NAME="declarationBoutons" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+	<SCRIPT NAME="TextTemplateImportFilesProject" META_OBJECT="View" CATEGORY="default">
 		<TEXT><![CDATA[
-String result = "";
-
-for (Action action : current.getActions()){
-	result += manager.getString(action, "actionBoutonsDeclaration");
-	
-}
-
-return result;
-]]></TEXT>
-	</TEXT_MACRO>
-	<TEXT_MACRO NAME="declarationBoutonsImpl" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
-		<TEXT><![CDATA[
-String result = "";
-
-for (Action action : current.getActions()){
-	result += manager.getString(action, "actionBoutonsImpl");
-	
-}
-
-return result;
-]]></TEXT>
-	</TEXT_MACRO>
-	<TEXT_MACRO NAME="declarationContentsProprietes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
-		<TEXT><![CDATA[
-String res = "";
-
-for (ModelProperty property : current.getModel().getProperties()) {
-	res += manager.getString(property, "ContentsProprietes");
-}
-
-return res;
-]]></TEXT>
-	</TEXT_MACRO>
-	<TEXT_MACRO NAME="declarationGroupes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
-		<TEXT><![CDATA[
-String res = "";
-
-for (Model element : current.getModel().getOwnedElements()) {
-	res += manager.getString(element, "implantationGroupes");
-}
-
-return res;
-]]></TEXT>
-	</TEXT_MACRO>
-	<TEXT_MACRO NAME="declarationMethodes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
-		<TEXT><![CDATA[
-String result = "";
-
-for (Action action : current.getActions()){
-	result += manager.getString(action, "actionDeclaration");
-	
-}
-
-return result;
-]]></TEXT>
-	</TEXT_MACRO>
-	<TEXT_MACRO NAME="declarationVueListe" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
-		<TEXT><![CDATA[
-String res = "";
-
-for (Model elem : current.getModel().getOwnedElements()) {
-	res += manager.getString(elem, "declarationVueListe");
-}
-
-return res;
-]]></TEXT>
-	</TEXT_MACRO>
-	<SCRIPT NAME="generationClasse" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
-		<TEXT><![CDATA[
-package com.mia.banque.ui.view.swt;
-
-[[importOutilsSwt]]
-[[importFichiersProjet]]
-
-public class [[name]] extends Shell implements I[[name]] {
-	
-	private I[[modelName]]Controler controler;
-	private I[[modelName]] model;
-	[[declarationVueListe]]
-	
-[[declarationBoutons]]	
-[[constructeurDeclaration]]	
-[[implantationMethodes]]
-	
-}
-]]></TEXT>
-		<PROPERTY NAME="Filename"/>
-	</SCRIPT>
-	<SCRIPT NAME="generationClasse$Filename" META_OBJECT="View" CATEGORY="default">
-		<TEXT><![CDATA[
-src/com/mia/banque/ui/view/swt/[[name]].java
+import com.mia.banque.ui.controler.I[[MacroModelName]]Controler;
+import com.mia.banque.ui.view.I[[MacroModelName]]View;
+import com.mia.banque.model.I[[MacroModelName]];
 ]]></TEXT>
 	</SCRIPT>
-	<SCRIPT NAME="generationInterface" META_OBJECT="View" CATEGORY="default" FILE_ENCODING="windows-1252" VISIBILITY="private">
-		<TEXT><![CDATA[
-package com.mia.banque.ui.view;
-
-public interface I[[name]] {
-	
-[[declarationMethodes]]
-}
-]]></TEXT>
-		<PROPERTY NAME="Filename"/>
-	</SCRIPT>
-	<SCRIPT NAME="generationInterface$Filename" META_OBJECT="View" CATEGORY="default">
-		<TEXT><![CDATA[
-src/com/mia/banque/ui/view/I[[name]].java
-]]></TEXT>
-	</SCRIPT>
-	<TEXT_MACRO NAME="implantationMethodes" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
-		<TEXT><![CDATA[
-String result = "";
-
-for (Action action : current.getActions()){
-	result += manager.getString(action, "actionMethodesDeclaration");
-	
-}
-
-return result;
-]]></TEXT>
-	</TEXT_MACRO>
-	<SCRIPT NAME="importFichiersProjet" META_OBJECT="View" CATEGORY="default">
-		<TEXT><![CDATA[
-import com.mia.banque.ui.controler.I[[modelName]]Controler;
-import com.mia.banque.ui.view.I[[modelName]]View;
-import com.mia.banque.model.I[[modelName]];
-]]></TEXT>
-	</SCRIPT>
-	<SCRIPT NAME="importOutilsSwt" META_OBJECT="View" CATEGORY="default">
+	<SCRIPT NAME="TextTemplateImportSwtTools" META_OBJECT="View" CATEGORY="default">
 		<TEXT><![CDATA[
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -276,9 +219,4 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Group;
 ]]></TEXT>
 	</SCRIPT>
-	<TEXT_MACRO NAME="modelName" META_OBJECT="View" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
-		<TEXT><![CDATA[
-return current.getName().replace("View", "");
-]]></TEXT>
-	</TEXT_MACRO>
 </PACKAGE>
