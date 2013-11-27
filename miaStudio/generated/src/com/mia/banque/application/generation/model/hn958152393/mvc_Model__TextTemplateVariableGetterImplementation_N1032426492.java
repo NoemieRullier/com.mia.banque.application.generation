@@ -83,8 +83,6 @@ _template_buffer.append(manager.action(current, "name"));_template_buffer.append
 _template_buffer.append('\n');
 _template_buffer.append("	}");
 _template_buffer.append('\n');
-_template_buffer.append("	");
-_template_buffer.append('\n');
 
 return _template_buffer.toString();
 

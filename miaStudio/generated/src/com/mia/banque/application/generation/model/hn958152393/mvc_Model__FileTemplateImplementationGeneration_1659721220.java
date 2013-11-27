@@ -82,9 +82,18 @@ _template_buffer.append(manager.action(current, "name"));_template_buffer.append
 _template_buffer.append('\n');
 _template_buffer.append('\n');
 
-_template_buffer.append(manager.action(current, "MacroAttributesDeclaration"));_template_buffer.append('\n');
+_template_buffer.append(manager.action(current, "MacroOEVariableDeclaration"));_template_buffer.append('\n');
 
-_template_buffer.append(manager.action(current, "MacroMethodsImplementation"));_template_buffer.append('\n');
+_template_buffer.append(manager.action(current, "MacroPropertiesVariableDeclaration"));_template_buffer.append('\n');
+
+_template_buffer.append(manager.action(current, "MacroOEMethodsGetterImpl"));_template_buffer.append('\n');
+
+_template_buffer.append(manager.action(current, "MacroOEMethodsSetterImpl"));_template_buffer.append('\n');
+
+_template_buffer.append(manager.action(current, "MacroPropertiesMethodsGetterImpl"));_template_buffer.append('\n');
+
+_template_buffer.append(manager.action(current, "MacroPropertiesMethodsSetterImpl"));_template_buffer.append('\n');
+_template_buffer.append('\n');
 _template_buffer.append("}");
 return _template_buffer.toString();
 

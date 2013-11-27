@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE PACKAGE SYSTEM "package.dtd">
-<PACKAGE NAME="com.mia.banque.application.generation.model" METAMODEL="MVC" NUMBER="17"
+<PACKAGE NAME="com.mia.banque.application.generation.model" METAMODEL="MVC" NUMBER="24"
  DOCUMENTATION="">
 	<fileHeader version="5" toolName="Mia-Generation" toolVersion="9.0.0"/>
 	<SCENARIO NAME="ScenarioModel" VISIBILITY="public" META_OBJECT="Model" CATEGORY="default" DOCUMENTATION="">
@@ -18,8 +18,13 @@ import com.mia.banque.model.I[[name]];
 
 public class [[name]] implements com.mia.banque.model.I[[name]] {
 
-[[MacroAttributesDeclaration]]
-[[MacroMethodsImplementation]]
+[[MacroOEVariableDeclaration]]
+[[MacroPropertiesVariableDeclaration]]
+[[MacroOEMethodsGetterImpl]]
+[[MacroOEMethodsSetterImpl]]
+[[MacroPropertiesMethodsGetterImpl]]
+[[MacroPropertiesMethodsSetterImpl]]
+
 }
 ]]></TEXT>
 		<PROPERTY NAME="Filename"/>
@@ -37,7 +42,11 @@ import java.util.List;
 
 public interface I[[name]] {
 
-[[MacroMethodsDeclaration]]
+[[MacroPropertiesGetter]]
+[[MacroOEGetter]]
+[[MacroPropertiesSetter]]
+[[MacroOESetter]]
+
 }
 ]]></TEXT>
 		<PROPERTY NAME="Filename"/>
@@ -47,53 +56,54 @@ public interface I[[name]] {
 src/com/mia/banque/model/I[[name]].java
 ]]></TEXT>
 	</SCRIPT>
-	<TEXT_MACRO NAME="MacroAttributesDeclaration" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+	<TEXT_MACRO NAME="MacroOEGetter" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
-String result = "";
-
-for (Model element : current.getOwnedElements()){
-	 result += manager.getString(element, "TextTemplateVariableDeclaration");
-}
-
-for (ModelProperty property : current.getProperties()){
-	result += manager.getString(property, "TextTemplateVariableDeclaration");
-}
-
-return result;
+return manager.apply(current.getOwnedElements(), "TextTemplateVariableGetterDeclaration");
 ]]></TEXT>
 	</TEXT_MACRO>
-	<TEXT_MACRO NAME="MacroMethodsDeclaration" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+	<TEXT_MACRO NAME="MacroOEMethodsGetterImpl" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
-String result = "";
-
-for (Model element : current.getOwnedElements()){
-	 result += manager.getString(element, "TextTemplateVariableGetterDeclaration");
-	 result += manager.getString(element, "TextTemplateVariableSetterDeclaration");
-}
-
-for (ModelProperty property : current.getProperties()){
-	result += manager.getString(property, "TextTemplateVariableGetterDeclaration");
-	result += manager.getString(property, "TextTemplateVariableSetterDeclaration");
-}
-
-return result;
+return manager.apply(current.getOwnedElements(), "TextTemplateVariableGetterImplementation");
 ]]></TEXT>
 	</TEXT_MACRO>
-	<TEXT_MACRO NAME="MacroMethodsImplementation" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+	<TEXT_MACRO NAME="MacroOEMethodsSetterImpl" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
 		<TEXT><![CDATA[
-String result = "";
-
-for (Model element : current.getOwnedElements()){
-	result += manager.getString(element, "TextTemplateVariableGetterImplementation");
-	result += manager.getString(element, "TextTemplateVariableSetterImplementation");
-}
-
-for (ModelProperty property : current.getProperties()){
-	result += manager.getString(property, "TextTemplateVariableGetterImplementation");
-	result += manager.getString(property, "TextTemplateVariableSetterImplementation");
-}
-
-return result;
+return manager.apply(current.getOwnedElements(), "TextTemplateVariableSetterImplementation");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroOESetter" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getOwnedElements(), "TextTemplateVariableSetterDeclaration");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroOEVariableDeclaration" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getOwnedElements(), "TextTemplateVariableDeclaration");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroPropertiesGetter" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getProperties(), "TextTemplateVariableGetterDeclaration");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroPropertiesMethodsGetterImpl" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getProperties(), "TextTemplateVariableGetterImplementation");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroPropertiesMethodsSetterImpl" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getProperties(), "TextTemplateVariableSetterImplementation");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroPropertiesSetter" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getProperties(), "TextTemplateVariableSetterDeclaration");
+]]></TEXT>
+	</TEXT_MACRO>
+	<TEXT_MACRO NAME="MacroPropertiesVariableDeclaration" META_OBJECT="Model" CATEGORY="default" RETURN_TYPE_KIND="primitive" RETURN_TYPE_NAME="String">
+		<TEXT><![CDATA[
+return manager.apply(current.getProperties(), "TextTemplateVariableDeclaration");
 ]]></TEXT>
 	</TEXT_MACRO>
 	<SCRIPT NAME="TextTemplateVariableDeclaration" META_OBJECT="Model" CATEGORY="default">
@@ -116,7 +126,6 @@ return result;
 		}
 		return this.list[[name]];
 	}
-	
 
 ]]></TEXT>
 	</SCRIPT>
@@ -132,7 +141,6 @@ return result;
 		this.list[[name]] = newValue;
 	}
 	
-
 ]]></TEXT>
 	</SCRIPT>
 	<SCRIPT NAME="TextTemplateVariableDeclaration" META_OBJECT="ModelProperty" CATEGORY="default">

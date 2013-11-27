@@ -13,14 +13,14 @@ import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.*;
 
 @SuppressWarnings({"unused","unchecked","rawtypes","nls","serial",})
-public class mvc_Model__MacroAttributesDeclaration_2053468059 implements com.mia.studio.kernel.compiler.CompiledAction {
+public class mvc_Model__MacroPropertiesGetter_N1627263706 implements com.mia.studio.kernel.compiler.CompiledAction {
 
-	public mvc_Model__MacroAttributesDeclaration_2053468059() {
+	public mvc_Model__MacroPropertiesGetter_N1627263706() {
 		//Do nothing
 	}
 
 	//For internal use only
-	mvc_Model__MacroAttributesDeclaration_2053468059(int anyInt, List anyList) {
+	mvc_Model__MacroPropertiesGetter_N1627263706(int anyInt, List anyList) {
 		List<java.lang.Integer> otherList = anyList;
 		throw new java.lang.UnsupportedOperationException();
 	}
@@ -38,7 +38,7 @@ public class mvc_Model__MacroAttributesDeclaration_2053468059 implements com.mia
 				throw new IllegalArgumentException(
 						String.format(
 								"Bad parameter type in call to %s. Found '%s' when expected '%s'.",
-								"MacroAttributesDeclaration", argument.getClass().getName(),
+								"MacroPropertiesGetter", argument.getClass().getName(),
 								expectedClass.getName()));
 			}
 		}
@@ -52,7 +52,7 @@ public class mvc_Model__MacroAttributesDeclaration_2053468059 implements com.mia
 
 	public String runAction(java.lang.Object[] _action_parameters) {
 		if (_action_parameters.length != 3)
-			throw new IllegalArgumentException("Wrong number of parameters in call to ''MacroAttributesDeclaration''");
+			throw new IllegalArgumentException("Wrong number of parameters in call to ''MacroPropertiesGetter''");
 
 		final com.mia.formation.mvc.Model current = __check_arg__(com.mia.formation.mvc.Model.class, _action_parameters[0]);
 		final com.mia.openapi.gen.Context context = __check_arg__(com.mia.openapi.gen.Context.class, _action_parameters[1]);
@@ -64,7 +64,7 @@ public class mvc_Model__MacroAttributesDeclaration_2053468059 implements com.mia
 	public String __invoke_user_code__(final com.mia.formation.mvc.Model current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-return manager.apply(current.getOwnedElements(), "TextTemplateVariableDeclaration");
+return manager.apply(current.getProperties(), "TextTemplateVariableGetterDeclaration");
 
 }
 }

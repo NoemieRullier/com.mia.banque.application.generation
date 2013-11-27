@@ -64,19 +64,10 @@ public class mvc_Model__MacroMethodsDeclaration_987777392 implements com.mia.stu
 	public String __invoke_user_code__(final com.mia.formation.mvc.Model current, final com.mia.openapi.gen.Context context, final com.mia.openapi.gen.GenerationServicesManager manager)
 {
 
-String result = "";
-
-for (Model element : current.getOwnedElements()){
-	 result += manager.getString(element, "TextTemplateVariableGetterDeclaration");
-	 result += manager.getString(element, "TextTemplateVariableSetterDeclaration");
-}
-
-for (ModelProperty property : current.getProperties()){
-	result += manager.getString(property, "TextTemplateVariableGetterDeclaration");
-	result += manager.getString(property, "TextTemplateVariableSetterDeclaration");
-}
-
-return result;
+return manager.apply(current.getOwnedElements(), "TextTemplateVariableGetterDeclaration");
+return manager.apply(current.getOwnedElements(), "TextTemplateVariableSetterDeclaration");
+return manager.apply(current.getProperties(), "TextTemplateVariableGetterDeclaration");
+return manager.apply(current.getProperties(), "TextTemplateVariableSetterDeclaration");
 
 }
 }
